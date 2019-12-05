@@ -25,7 +25,6 @@ __Acceptance Criteria__
 - Given that I have made a request to the `/ingredients` endpoint, I should receive a `JSON` response of the ingredients in my fridge.
 - Given that I get the options of my ingredients, I should choose some ingredients to get the recipes.
 - Given that an ingredient is past its `use-by` date (inclusive), I should not be able to choose that ingredient.
-- Given that an ingredient is past its ​best-before​ date (inclusive), but is still within its ​use-by​ date (inclusive), it should be placed at the bottom with the oldest (less fresh) last.
 - Given that I have chosen some ingredients, I should request to the `/recipes` endpoint with
  `?ingredients=<title-1>,<title-2>,<title-n>` as a query parameter.
 - Given that I get the result of the available recipes, I should see a list of the recipes as well as the ingredients to make per recipes.
@@ -62,11 +61,9 @@ The application should be committed to a `public` repository on `GitHub` or `Bit
 
 ## Getting Started with Flutter
 
-This project is a starting point for a Flutter application.
-
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
+For help getting started with Flutter, view [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
