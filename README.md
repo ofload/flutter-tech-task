@@ -48,7 +48,7 @@ https://documenter.getpostman.com/view/9359572/SW17TFmK
 
 __Mock Base URL__
 
-https://a61d556b-57ca-423f-8706-2e8dec75d714.mock.pstmn.io
+https://lb7u7svcm5.execute-api.ap-southeast-1.amazonaws.com/dev
 
 __Instruction__
 1. Use `/ingredients` to get all of my ingredients on my fridge
