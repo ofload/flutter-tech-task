@@ -94,7 +94,9 @@ class _LunchState extends State<LunchPage> {
       margin: EdgeInsets.all(20),
       height: MediaQuery.of(context).size.height * 0.09,
       child: RaisedButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, '/ingredients');
+        },
         color: Colors.orange,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
