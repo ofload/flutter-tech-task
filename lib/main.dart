@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String root = "https://lb7u7svcm5.execute-api.ap-southeast-1.amazonaws.com/dev";
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
