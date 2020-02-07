@@ -45,7 +45,7 @@ https://documenter.getpostman.com/view/9359572/SW17TFmK
 
 __Mock Base URL__
 
-https://a61d556b-57ca-423f-8706-2e8dec75d714.mock.pstmn.io
+https://lb7u7svcm5.execute-api.ap-southeast-1.amazonaws.com/dev
 
 __Instruksi__
 1. Gunakan `/ingredients` untuk mendapatkan bahan - bahan saya yang ada di kulkas
