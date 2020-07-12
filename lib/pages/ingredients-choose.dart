@@ -25,7 +25,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
             body.map((e) => IngredientInterface.fromJson(e)).where((element) {
           var selectedDate =
               DateTime.parse(DateFormat('yyyy-MM-dd').format(widget.date));
-          return element.useBy == selectedDate;
+          return element.useBy.compareTo(selectedDate) > -1;
         }).toList();
       });
     });
@@ -57,7 +57,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
                       child: ListIngredient(
                           title: this.ingredients[index].title,
                           selected: this.ingredients[index].selected),
-                      onTap: () => onSelect(index),
+                      onTap: () => _onSelect(index),
                     );
                   })
               : Text('No Ingredients in Your Fridge')
@@ -73,7 +73,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
     );
   }
 
-  onSelect(int index) {
+  _onSelect(int index) {
     // Change to json first because variable is final and cannot make
     // a change of the value
     var data = this.ingredients[index].toJson();

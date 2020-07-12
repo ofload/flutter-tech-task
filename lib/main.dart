@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_task/pages/dashboard.dart';
+import 'package:tech_task/pages/ingredients-choose.dart';
 import 'package:tech_task/pages/schedule.dart';
 
 void main() => runApp(MyApp());
@@ -49,8 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: null, child: Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => _selectDate(context), child: Icon(Icons.add)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -59,5 +60,19 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       this._selectedIndex = index;
     });
+  }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => IngredientsChoosePage(date: picked)));
+    }
   }
 }
