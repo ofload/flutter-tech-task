@@ -96,7 +96,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                RecipeListPage(ingredients: selectedIngredients)));
+            builder: (context) => RecipeListPage(
+                date: widget.date, ingredients: selectedIngredients)));
   }
 }

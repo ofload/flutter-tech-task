@@ -1,20 +1,26 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tech_task/interfaces/recipes.dart';
+import 'package:tech_task/models/recipes.dart';
 import 'package:tech_task/services/api/api.dart';
 import 'package:tech_task/widgets/list-recipe.dart';
 
 class RecipeListPage extends StatefulWidget {
+  final DateTime date;
   final List<String> ingredients;
 
-  const RecipeListPage({Key key, @required this.ingredients}) : super(key: key);
+  const RecipeListPage(
+      {Key key, @required this.date, @required this.ingredients})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() => _RecipeListPage();
 }
 
 class _RecipeListPage extends State<RecipeListPage> {
   var api = ApiService();
+  var recipeModel = RecipeModel();
   List<RecipeInterface> recipes;
   @override
   void initState() {
@@ -22,6 +28,14 @@ class _RecipeListPage extends State<RecipeListPage> {
       List<dynamic> body = jsonDecode(value.body);
       setState(() {
         this.recipes = body.map((e) => RecipeInterface.fromJson(e)).toList();
+      });
+
+      this.recipes.forEach((element) {
+        this.recipeModel.insert(new RecipeModel(
+            id: DateTime.now().microsecondsSinceEpoch.toString(),
+            title: element.title,
+            ingredients: jsonEncode(element.ingredients),
+            date: DateFormat('yyyy-MM-dd').format(widget.date)));
       });
     });
     super.initState();
