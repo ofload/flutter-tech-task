@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tech_task/models/recipes.dart';
+import 'package:tech_task/widgets/list-recipe.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -36,15 +40,12 @@ class _SchadulePage extends State<SchedulePage> {
                     primary: false,
                     itemCount: this._recipeList.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return Card(
-                          child: ListTile(
-                            title: Text('21 July 2020'),
-                            subtitle: Text('Salad'),
-                          ),
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ));
+                      return ListRecipe(
+                        date: this._recipeList[index].date,
+                        title: this._recipeList[index].title,
+                        ingredients:
+                            jsonDecode(this._recipeList[index].ingredients),
+                      );
                     })
                 : Container()
             : Container()
