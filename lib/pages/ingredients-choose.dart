@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tech_task/interfaces/ingredient.dart';
+import 'package:tech_task/pages/recipe-list.dart';
 import 'package:tech_task/services/api/api.dart';
 import 'package:tech_task/widgets/list-ingredient.dart';
 
@@ -69,7 +70,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
       floatingActionButton:
           this.ingredients != null && this.ingredients.length > 0
               ? FloatingActionButton(
-                  onPressed: null,
+                  onPressed: () => _getReceipts(),
                   child: Icon(Icons.chevron_right),
                 )
               : null,
@@ -84,5 +85,18 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
     setState(() {
       this.ingredients[index] = IngredientInterface.fromJson(data);
     });
+  }
+
+  _getReceipts() {
+    var selectedIngredients = this
+        .ingredients
+        .where((element) => element.selected)
+        .map((e) => e.title)
+        .toList();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                RecipeListPage(ingredients: selectedIngredients)));
   }
 }

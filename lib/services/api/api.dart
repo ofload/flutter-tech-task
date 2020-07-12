@@ -6,4 +6,12 @@ class ApiService {
   Future<http.Response> getIngredients() {
     return http.get('$host/dev/ingredients');
   }
+
+  Future<http.Response> getRecipes(List<String> ingredients) {
+    var flatten = '';
+    for (int x = 0; x < ingredients.length; x++) {
+      flatten += '${ingredients[x]},';
+    }
+    return http.get('$host/dev/recipes?ingredients=$flatten');
+  }
 }
