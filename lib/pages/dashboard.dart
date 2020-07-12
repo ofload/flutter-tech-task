@@ -66,10 +66,12 @@ class _DashboardPage extends State<DashboardPage> {
               scrollDirection: Axis.horizontal,
               itemCount: _currentTimeList.length,
               itemBuilder: (BuildContext ctx, int index) {
-                return ButtonDate(
-                  dateTime: _currentTimeList[index]['date'],
-                  selected: _currentTimeList[index]['selected'],
-                );
+                return GestureDetector(
+                    child: ButtonDate(
+                      dateTime: _currentTimeList[index]['date'],
+                      selected: _currentTimeList[index]['selected'],
+                    ),
+                    onTap: () => _onSelect(index));
               }),
         ),
         FlatButton(
@@ -80,13 +82,23 @@ class _DashboardPage extends State<DashboardPage> {
                       builder: (context) =>
                           IngredientsChoosePage(date: this._selectedTime)));
             },
-            child: Text('Get Recommendation',
-                style: TextStyle(color: Colors.white)),
+            child: Text('Check Recipes', style: TextStyle(color: Colors.white)),
             color: Colors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ))
       ],
     );
+  }
+
+  _onSelect(int index) {
+    setState(() {
+      this._currentTimeList = this._currentTimeList.map((e) {
+        e['selected'] = false;
+        return e;
+      }).toList();
+      this._currentTimeList[index]['selected'] =
+          !this._currentTimeList[index]['selected'];
+    });
   }
 }
