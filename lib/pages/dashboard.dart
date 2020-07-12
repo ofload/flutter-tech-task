@@ -85,10 +85,11 @@ class _DashboardPage extends State<DashboardPage> {
             ? FlatButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              IngredientsChoosePage(date: this._selectedTime)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => IngredientsChoosePage(
+                                  date: this._selectedTime)))
+                      .whenComplete(() => this._getCurrectRecipes());
                 },
                 child: Text('Check Recipes',
                     style: TextStyle(color: Colors.white)),
