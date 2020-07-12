@@ -18,8 +18,6 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
   List<IngredientInterface> ingredients;
   @override
   void initState() {
-    var date = DateFormat('yyyy-MM-dd').format(widget.date);
-    print(date);
     api.getIngredients().then((value) {
       List body = jsonDecode(value.body);
       setState(() {
