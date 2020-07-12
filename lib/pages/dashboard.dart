@@ -11,14 +11,19 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPage extends State<DashboardPage> {
   DateTime _currentTime = DateTime.now();
   List _currentTimeList = new List();
+  DateTime _selectedTime;
 
   @override
   void initState() {
+    // Initialize selectedTime
+    this._selectedTime = this._currentTime;
+
     // Initialize _currentTimeList value
     for (var x = -1; x < 6; x++) {
+      var dateValue = _currentTime.add(Duration(days: x));
       _currentTimeList.add({
-        'date': _currentTime.add(Duration(days: x)),
-        'selected': x == 0 ? true : false
+        'date': dateValue,
+        'selected': dateValue == _selectedTime ? true : false
       });
     }
 
@@ -70,10 +75,10 @@ class _DashboardPage extends State<DashboardPage> {
         FlatButton(
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => IngredientsChoosePage()),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          IngredientsChoosePage(date: this._selectedTime)));
             },
             child: Text('Get Recommendation',
                 style: TextStyle(color: Colors.white)),

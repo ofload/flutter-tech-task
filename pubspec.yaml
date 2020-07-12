@@ -23,6 +23,10 @@ dependencies:
   # facilities, including message translation, plurals and genders,
   # date/number formatting and parsing, and bidirectional text.
   intl: ^0.16.1
+  # This package contains a set of high-level functions and classes
+  # that make it easy to consume HTTP resources. It's platform-independent,
+  # and can be used on both the command-line and the browser.
+  http: ^0.12.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
