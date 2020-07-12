@@ -10,7 +10,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPage extends State<DashboardPage> {
   DateTime _currentTime = DateTime.now();
   List _currentTimeList = new List();
-  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -67,9 +66,15 @@ class _DashboardPage extends State<DashboardPage> {
                 );
               }),
         ),
+        FlatButton(
+            onPressed: () {},
+            child: Text('Get Recommendation',
+                style: TextStyle(color: Colors.white)),
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ))
       ],
     );
   }
-
-  _onItemTapped(int index) {}
 }
