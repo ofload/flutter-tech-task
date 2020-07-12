@@ -1,13 +1,13 @@
 class IngredientInterface {
   final String title;
-  final DateTime useBy;
+  final String useBy;
   final bool selected;
 
   IngredientInterface({this.title, this.useBy, this.selected});
 
   IngredientInterface.fromJson(Map<String, dynamic> json)
       : title = json['title'],
-        useBy = DateTime.parse(json['use-by']),
+        useBy = json['use-by'],
         selected = json['selected'] != null ? json['selected'] : false;
 
   Map<String, dynamic> toJson() =>

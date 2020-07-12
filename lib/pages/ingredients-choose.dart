@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tech_task/interfaces/ingredient.dart';
 import 'package:tech_task/services/api/api.dart';
 import 'package:tech_task/widgets/list-ingredient.dart';
@@ -23,9 +22,7 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
       setState(() {
         this.ingredients =
             body.map((e) => IngredientInterface.fromJson(e)).where((element) {
-          var selectedDate =
-              DateTime.parse(DateFormat('yyyy-MM-dd').format(widget.date));
-          return element.useBy.compareTo(selectedDate) > -1;
+          return DateTime.parse(element.useBy).compareTo(widget.date) > -1;
         }).toList();
       });
     });
