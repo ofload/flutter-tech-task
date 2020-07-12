@@ -21,7 +21,6 @@ class _DashboardPage extends State<DashboardPage> {
         'selected': x == 0 ? true : false
       });
     }
-    print(_currentTimeList);
 
     super.initState();
   }

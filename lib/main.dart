@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_task/pages/dashboard.dart';
+import 'package:tech_task/pages/schedule.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List _page = [DashboardPage()];
+  List _page = [DashboardPage(), SchedulePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.today),
-            title: Text('Your Recipes'),
+            title: Text('Lunch Schedule'),
           ),
         ],
         currentIndex: _selectedIndex,
@@ -54,5 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _onItemTapped(int index) {}
+  _onItemTapped(int index) {
+    setState(() {
+      this._selectedIndex = index;
+    });
+  }
 }
