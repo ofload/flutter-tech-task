@@ -47,20 +47,26 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
                     fontSize: 30.0,
                     color: Colors.black)),
           ),
-          this.ingredients != null && this.ingredients.length > 0
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: this.ingredients.length,
-                  itemBuilder: (BuildContext ctx, int index) {
-                    return GestureDetector(
-                      child: ListIngredient(
-                          title: this.ingredients[index].title,
-                          selected: this.ingredients[index].selected),
-                      onTap: () => _onSelect(index),
-                    );
-                  })
-              : Text('No Ingredients in Your Fridge')
+          this.ingredients != null
+              ? this.ingredients.length > 0
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: this.ingredients.length,
+                      itemBuilder: (BuildContext ctx, int index) {
+                        return GestureDetector(
+                          child: ListIngredient(
+                              title: this.ingredients[index].title,
+                              selected: this.ingredients[index].selected),
+                          onTap: () => _onSelect(index),
+                        );
+                      })
+                  : Text('No Ingredients in Your Fridge')
+              : Padding(
+                  padding: EdgeInsets.only(top: 100.0),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ))
         ],
       ),
       floatingActionButton:
