@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tech_task/pages/ingredients-choose.dart';
 import 'package:tech_task/widgets/button-date.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -67,7 +68,13 @@ class _DashboardPage extends State<DashboardPage> {
               }),
         ),
         FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => IngredientsChoosePage()),
+              );
+            },
             child: Text('Get Recommendation',
                 style: TextStyle(color: Colors.white)),
             color: Colors.blue,
