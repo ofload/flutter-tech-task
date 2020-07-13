@@ -24,20 +24,7 @@ class _RecipeListPage extends State<RecipeListPage> {
   List<RecipeInterface> recipes;
   @override
   void initState() {
-    this.api.getRecipes(widget.ingredients).then((value) {
-      List<dynamic> body = jsonDecode(value.body);
-      setState(() {
-        this.recipes = body.map((e) => RecipeInterface.fromJson(e)).toList();
-      });
-
-      this.recipes.forEach((element) {
-        this.recipeModel.insert(new RecipeModel(
-            id: DateTime.now().microsecondsSinceEpoch.toString(),
-            title: element.title,
-            ingredients: jsonEncode(element.ingredients),
-            date: DateFormat('yyyy-MM-dd').format(widget.date)));
-      });
-    });
+    this._getRecipes();
     super.initState();
   }
 
@@ -75,5 +62,30 @@ class _RecipeListPage extends State<RecipeListPage> {
                 ))
       ],
     ));
+  }
+
+  _getRecipes() async {
+    var selectedDate = DateFormat('yyyy-MM-dd').format(widget.date);
+    var data = await this.api.getRecipes(widget.ingredients);
+    List<dynamic> body = jsonDecode(data.body);
+    setState(() {
+      this.recipes = body.map((e) => RecipeInterface.fromJson(e)).toList();
+    });
+
+    List<RecipeModel> savedRecipes = (await this.recipeModel.getAll())
+        .where((element) => element.date.contains(selectedDate))
+        .toList();
+    // Remove the current data on selected date
+    savedRecipes.forEach((element) {
+      this.recipeModel.delete(element.id);
+    });
+
+    this.recipes.forEach((element) {
+      this.recipeModel.insert(new RecipeModel(
+          id: DateTime.now().microsecondsSinceEpoch.toString(),
+          title: element.title,
+          ingredients: jsonEncode(element.ingredients),
+          date: selectedDate));
+    });
   }
 }

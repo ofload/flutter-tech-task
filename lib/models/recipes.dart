@@ -63,7 +63,7 @@ class RecipeModel extends Model {
         whereArgs: [recipe.id]);
   }
 
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     // Get a reference to the database.
     final db = await database();
 

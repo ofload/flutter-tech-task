@@ -81,23 +81,25 @@ class _DashboardPage extends State<DashboardPage> {
                     onTap: () => _onSelect(index));
               }),
         ),
-        this._selectedRecipeList == null || this._selectedRecipeList.length == 0
-            ? FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => IngredientsChoosePage(
-                                  date: this._selectedTime)))
-                      .whenComplete(() => this._getCurrectRecipes());
-                },
-                child: Text('Check Recipes',
-                    style: TextStyle(color: Colors.white)),
-                color: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ))
-            : Container(),
+        FlatButton(
+            onPressed: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              IngredientsChoosePage(date: this._selectedTime)))
+                  .whenComplete(() => this._getCurrectRecipes());
+            },
+            child: Text(
+                this._selectedRecipeList == null ||
+                        this._selectedRecipeList.length == 0
+                    ? 'Check Recipes'
+                    : 'Update Recipes',
+                style: TextStyle(color: Colors.white)),
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            )),
         this._selectedRecipeList != null
             ? this._selectedRecipeList.length > 0
                 ? ListView.builder(
