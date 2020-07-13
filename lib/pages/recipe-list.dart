@@ -10,9 +10,13 @@ import 'package:tech_task/widgets/list-recipe.dart';
 class RecipeListPage extends StatefulWidget {
   final DateTime date;
   final List<String> ingredients;
+  final ValueNotifier<List<RecipeModel>> selectedRecipeList;
 
   const RecipeListPage(
-      {Key key, @required this.date, @required this.ingredients})
+      {Key key,
+      @required this.date,
+      @required this.ingredients,
+      this.selectedRecipeList})
       : super(key: key);
   @override
   State<StatefulWidget> createState() => _RecipeListPage();
@@ -87,5 +91,14 @@ class _RecipeListPage extends State<RecipeListPage> {
           ingredients: jsonEncode(element.ingredients),
           date: selectedDate));
     });
+
+    var res = this.recipes.map((e) {
+      return RecipeModel(
+          id: DateTime.now().microsecondsSinceEpoch.toString(),
+          title: e.title,
+          ingredients: jsonEncode(e.ingredients),
+          date: selectedDate);
+    }).toList();
+    widget.selectedRecipeList.value = res;
   }
 }

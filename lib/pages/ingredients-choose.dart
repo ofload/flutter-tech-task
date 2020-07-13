@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tech_task/interfaces/ingredient.dart';
+import 'package:tech_task/models/recipes.dart';
 import 'package:tech_task/pages/recipe-list.dart';
 import 'package:tech_task/services/api/api.dart';
 import 'package:tech_task/widgets/list-ingredient.dart';
 
 class IngredientsChoosePage extends StatefulWidget {
   final DateTime date;
+  final ValueNotifier<List<RecipeModel>> selectedRecipeList;
 
-  const IngredientsChoosePage({Key key, this.date}) : super(key: key);
+  const IngredientsChoosePage({Key key, this.date, this.selectedRecipeList})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() => _IngredientsChoosePage();
 }
@@ -97,6 +100,8 @@ class _IngredientsChoosePage extends State<IngredientsChoosePage> {
         context,
         MaterialPageRoute(
             builder: (context) => RecipeListPage(
-                date: widget.date, ingredients: selectedIngredients)));
+                date: widget.date,
+                ingredients: selectedIngredients,
+                selectedRecipeList: widget.selectedRecipeList)));
   }
 }

@@ -3,6 +3,8 @@ import 'package:tech_task/pages/dashboard.dart';
 import 'package:tech_task/pages/ingredients-choose.dart';
 import 'package:tech_task/pages/schedule.dart';
 
+import 'models/recipes.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -28,8 +30,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ValueNotifier<List<RecipeModel>> _selectedRecipeList =
+      ValueNotifier<List<RecipeModel>>(null);
   int _selectedIndex = 0;
-  List _page = [DashboardPage(), SchedulePage()];
+  List _page;
+
+  @override
+  void initState() {
+    this._page = [
+      DashboardPage(selectedRecipeList: _selectedRecipeList),
+      SchedulePage()
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => IngredientsChoosePage(date: picked)));
+              builder: (context) => IngredientsChoosePage(
+                  selectedRecipeList: this._selectedRecipeList, date: picked)));
     }
   }
 }

@@ -8,6 +8,9 @@ import 'package:tech_task/widgets/button-date.dart';
 import 'package:tech_task/widgets/list-recipe.dart';
 
 class DashboardPage extends StatefulWidget {
+  final ValueNotifier<List<RecipeModel>> selectedRecipeList;
+
+  const DashboardPage({Key key, this.selectedRecipeList}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _DashboardPage();
 }
@@ -18,7 +21,6 @@ class _DashboardPage extends State<DashboardPage> {
   DateTime _currentTime = DateTime.now();
   List _currentTimeList = new List();
   DateTime _selectedTime;
-  List<RecipeModel> _selectedRecipeList;
 
   @override
   void initState() {
@@ -81,40 +83,48 @@ class _DashboardPage extends State<DashboardPage> {
                     onTap: () => _onSelect(index));
               }),
         ),
-        FlatButton(
-            onPressed: () {
-              Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              IngredientsChoosePage(date: this._selectedTime)))
-                  .whenComplete(() => this._getCurrectRecipes());
-            },
-            child: Text(
-                this._selectedRecipeList == null ||
-                        this._selectedRecipeList.length == 0
-                    ? 'Check Recipes'
-                    : 'Update Recipes',
-                style: TextStyle(color: Colors.white)),
-            color: Colors.blue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            )),
-        this._selectedRecipeList != null
-            ? this._selectedRecipeList.length > 0
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: this._selectedRecipeList.length,
-                    itemBuilder: (BuildContext ctx, int index) {
-                      return ListRecipe(
-                        title: this._selectedRecipeList[index].title,
-                        ingredients: jsonDecode(
-                            this._selectedRecipeList[index].ingredients),
-                      );
-                    })
-                : Container()
-            : Container()
+        ValueListenableBuilder(
+            valueListenable: widget.selectedRecipeList,
+            builder: (BuildContext ctx, List<RecipeModel> value, Widget child) {
+              return Column(
+                children: <Widget>[
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => IngredientsChoosePage(
+                                    date: this._selectedTime,
+                                    selectedRecipeList:
+                                        widget.selectedRecipeList)));
+                      },
+                      child: Text(
+                          value == null || value.length == 0
+                              ? 'Check Recipes'
+                              : 'Update Recipes',
+                          style: TextStyle(color: Colors.white)),
+                      color: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      )),
+                  value != null
+                      ? value.length > 0
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: value.length,
+                              itemBuilder: (BuildContext ctx, int index) {
+                                return ListRecipe(
+                                  title: value[index].title,
+                                  ingredients:
+                                      jsonDecode(value[index].ingredients),
+                                );
+                              })
+                          : Container()
+                      : Container()
+                ],
+              );
+            })
       ],
     );
   }
@@ -141,9 +151,7 @@ class _DashboardPage extends State<DashboardPage> {
       var data = value.where((element) {
         return element.date == selectedDate;
       }).toList();
-      setState(() {
-        this._selectedRecipeList = data;
-      });
+      widget.selectedRecipeList.value = data;
     });
   }
 }
