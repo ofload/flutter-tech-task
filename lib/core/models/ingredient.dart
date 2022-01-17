@@ -2,14 +2,14 @@
 class Ingredient {
   String title;
   String useBy;
-  bool isSelected = false;
-  bool isExpired = false;
+  bool isSelected;
+  bool isExpired;
 
   Ingredient({
     this.title,
     this.useBy,
-    this.isSelected,
-    this.isExpired,
+    this.isSelected= false,
+    this.isExpired= false,
   });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) => Ingredient(

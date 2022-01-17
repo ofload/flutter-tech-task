@@ -5,6 +5,8 @@ import 'colors.dart';
 ThemeData appTheme = ThemeData.light().copyWith(
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: kWhite,
+    cardColor: kWhite,
+    colorScheme: ColorScheme.light(primary: kPrimaryColor),
     primaryIconTheme: IconThemeData().copyWith(
       color: kPrimaryColor,
     ),
