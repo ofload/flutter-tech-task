@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tech_task/core/view_model/ingredients_vm.dart';
+import 'package:tech_task/core/view_model/view_model.dart';
 import 'package:tech_task/view/utils/colors.dart';
 import 'package:tech_task/view/widget/button.dart';
 import 'package:tech_task/view/widget/check_box.dart';
@@ -11,7 +11,7 @@ class IngredientsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final _ingredientsViewModel = Provider.of<IngredientsViewModel>(context, listen: false);
+    final  ViewModel _ingredientsViewModel = Provider.of<ViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -32,7 +32,7 @@ class IngredientsScreen extends StatelessWidget {
                     onTap: (){
                       _ingredientsViewModel.selectIngredient(_ingredientsViewModel.ingredients[index]);
                     },
-                    child: Consumer<IngredientsViewModel>(
+                    child: Consumer<ViewModel>(
                       builder: (context, ingredientVM, child)=> AppCheckBox(
                         isActive: ingredientVM.ingredients[index].isSelected,
                       ),
@@ -53,7 +53,9 @@ class IngredientsScreen extends StatelessWidget {
             const Spacer(),
             AppButton(
               text: 'Get Recipes',
-              onTap: () {},
+              onTap: () {
+                _ingredientsViewModel.getRecipes(context);
+              },
             ),
           ],
         ),

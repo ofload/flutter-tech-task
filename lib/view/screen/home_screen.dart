@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tech_task/core/view_model/ingredients_vm.dart';
+import 'package:tech_task/core/view_model/view_model.dart';
 import 'package:tech_task/view/utils/colors.dart';
 import 'package:tech_task/view/widget/button.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ingredientsVM = Provider.of<IngredientsViewModel>(context, listen: false);
+    final _viewModel = Provider.of<ViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -29,16 +29,17 @@ class HomeScreen extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: (){
-                    ingredientsVM.pickDate(context);
+                    _viewModel.pickDate(context);
                   },
                   child: Container(
+                    key: Key("showDate"),
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: kGrey)),
                     child: Row(
                       children: [
-                        Consumer<IngredientsViewModel>(
+                        Consumer<ViewModel>(
                           builder: (context, ingredientViewModel, child) => Text(
                             ingredientViewModel.formatDate(),
                             style: Theme.of(context).textTheme.bodyText1,
@@ -58,7 +59,7 @@ class HomeScreen extends StatelessWidget {
             AppButton(
               text: 'Get Ingredients',
               onTap: (){
-                ingredientsVM.getIngredients(context);
+                _viewModel.getIngredients(context);
               },
             )
           ],

@@ -14,6 +14,7 @@ class RequestService {
   ApiHandler _apiHandler= ApiHandler();
 
   Future<ApiResponse> getIngredients() async {
+    
     ApiResponse apiResponse = ApiResponse(error: false);
     List<Ingredient> ingredients = [];
     String getIngredientUrl = "${_apiHandler.baseUrl}/ingredients";
@@ -27,9 +28,7 @@ class RequestService {
         response.data.forEach((ingredient) {
           ingredients.add(Ingredient.fromJson(ingredient));
         });
-
         apiResponse.data = ingredients;
-
       } else {
         apiResponse.error = true;
         apiResponse.message =

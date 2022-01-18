@@ -1,6 +1,6 @@
 class Recipe {
   String title;
-  List<String> ingredients;
+  List<dynamic> ingredients;
 
   Recipe({
     this.title,
